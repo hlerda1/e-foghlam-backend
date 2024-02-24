@@ -9,7 +9,7 @@ const UsuarioSchema = Schema({
   password: String,
   dni: Number,
   fechaNacimiento: String,
-  createAtt: { type: Date, default: Date.now },
+  createDtt: { type: Date, default: Date.now },
   rol: String,
 });
 

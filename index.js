@@ -18,6 +18,10 @@ app.use(cors());
 //4° Crear y usar rutas
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/comision', require('./routes/comision'));
+app.use('/api/evento', require('./routes/evento'));
+app.use('/api/actividad', require('./routes/actividad'));
+app.use('/api/materia', require('./routes/materia'));
+app.use('/api/curso', require('./routes/curso'));
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${process.env.PORT}`);

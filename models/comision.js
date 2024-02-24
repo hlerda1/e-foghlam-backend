@@ -6,7 +6,7 @@ const ComisionSchema = Schema({
   año: Number,
   turno: String,
   alumno: String,
-  createAtt: { type: Date, default: Date.now },
+  createDtt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('Comision', ComisionSchema);
