@@ -141,13 +141,14 @@ const loginUsuario = async (req, res = response) => {
       });
     }
 
-    const token = await generarJWT(usuario.id, usuario.nombre);
+    const token = await generarJWT(usuario.id, usuario.nombre, usuario.rol);
 
     res.json({
       ok: true,
       uid: usuario.id,
       msg: 'login',
       nombre: usuario.nombre,
+      rol: usuario.rol,
       token: token,
     });
   } catch (error) {
@@ -160,15 +161,16 @@ const loginUsuario = async (req, res = response) => {
 
 //revalidar
 const revalidarToken = async (req, res = response) => {
-  const { uid, nombre } = req;
+  const { uid, nombre, rol } = req;
 
   //tarea token
-  const token = await generarJWT(uid, nombre);
+  const token = await generarJWT(uid, nombre, rol);
 
   res.json({
     ok: true,
     uid,
     nombre,
+    rol,
     token,
   });
 };
