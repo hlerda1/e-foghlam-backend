@@ -1,97 +1,15 @@
-const { response } = require('express');
-const Mensaje = require('../models/mensaje');
+const { Router } = require('express');
 
-// crear mensaje
-const crearMensaje = async (req, res = response) => {
-  const mensaje = new Mensaje(req.body);
-  try {
-    const mensajeGuardar = await mensaje.save();
+const { crearMensaje } = require('../controllers/mensaje');
+const { obtenerMensaje } = require('../controllers/mensaje');
+const { actualizarMensaje } = require('../controllers/mensaje');
+const { eliminarMensaje } = require('../controllers/mensaje');
 
-    res.status(201).json({
-      ok: true,
-      mensaje: mensajeGuardar,
-    });
-  } catch (error) {
-    res.status(500).json({
-      ok: false,
-      msg: 'por favor hable con el administrador',
-    });
-  }
-};
+const router = Router();
 
-// obtener mensaje todos y por id
-const obtenerMensaje = async (req, res = response) => {
-  const mensajes = await Mensaje.find(req.query);
-  res.json({
-    ok: true,
-    mensajes,
-  });
-};
+router.post('/', crearMensaje);
+router.get('/', obtenerMensaje);
+router.put('/:id', actualizarMensaje);
+router.delete('/:id', eliminarMensaje);
 
-// editar mensaje
-const actualizarMensaje = async (req, res = response) => {
-  const mensajeId = req.params.id;
-
-  try {
-    const mensaje = await Mensaje.findById(mensajeId);
-
-    if (!mensaje) {
-      return res.status(404).json({
-        ok: false,
-        msg: 'no existe el mensaje',
-      });
-    }
-
-    const nuevoMensaje = {
-      ...req.body,
-    };
-
-    const mensajeActualizado = await Mensaje.findByIdAndUpdate(
-      mensajeId,
-      nuevoMensaje,
-      { new: true }
-    );
-    res.json({
-      ok: true,
-      evento: mensajeActualizado,
-    });
-  } catch (error) {
-    res.status(500).json({
-      ok: false,
-      msg: 'por favor hable con el administrador',
-    });
-  }
-};
-
-// eliminar mensaje
-const eliminarMensaje = async (req, res = response) => {
-  const mensajeId = req.params.id;
-
-  try {
-    const mensaje = await Mensaje.findById(mensajeId);
-
-    if (!mensaje) {
-      return res.status(404).json({
-        ok: false,
-        msg: 'no existe mensaje',
-      });
-    }
-
-    await Mensaje.findByIdAndDelete(mensajeId);
-    res.json({
-      ok: true,
-    });
-  } catch (error) {
-    res.status(500).json({
-      ok: false,
-      msg: 'por favor hable con el administrador',
-    });
-  }
-};
-
-module.exports = {
-  crearMensaje,
-  obtenerMensaje,
-  actualizarMensaje,
-  eliminarMensaje,
-};
+module.exports = router;
