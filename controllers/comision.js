@@ -20,7 +20,10 @@ const crearComision = async (req, res = response) => {
 };
 // obtener comisiones
 const obtenerComision = async (req, res = response) => {
-  const comisiones = await Comision.find();
+  // const comisiones = await Comision.find();
+  const comisiones = await Comision.find().populate([{ 
+    path: 'alumnos',
+  }]);
   res.json({
     ok: true,
     comisiones,
