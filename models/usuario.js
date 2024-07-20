@@ -11,6 +11,12 @@ const UsuarioSchema = Schema({
   fechaNacimiento: String,
   createDtt: { type: Date, default: Date.now },
   rol: String,
+  tutorAsignado: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Usuario'
+    }
+  ]
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+module.exports = mongoose.model('Usuario', UsuarioSchema);

@@ -3,12 +3,18 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 
-// obtener usuario rol alumno
+// obtener usuario y rol
 const obtenerUsuario = async (req, res = response) => {
-  const alumnos = await Usuario.find(req.query);
+  const usuarios = await Usuario.find(req.query).populate([
+    {
+      path: 'tutorAsignado',
+      model: 'Usuario',
+    },
+    
+  ]);
   res.json({
     ok: true,
-    msg: alumnos,
+    msg: usuarios,
   });
 };
 
@@ -158,7 +164,7 @@ const loginUsuario = async (req, res = response) => {
     });
   }
 };
-
+auth.js
 //revalidar
 const revalidarToken = async (req, res = response) => {
   const { uid, nombre, rol } = req;
