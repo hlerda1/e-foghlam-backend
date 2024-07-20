@@ -164,7 +164,7 @@ const loginUsuario = async (req, res = response) => {
     });
   }
 };
-auth.js
+
 //revalidar
 const revalidarToken = async (req, res = response) => {
   const { uid, nombre, rol } = req;
