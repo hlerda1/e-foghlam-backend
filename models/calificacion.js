@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CalificacionSchema = Schema({
-    valor: number,
+    valor: Number,
     // Cambie de [{}] a simplemente {} ya que solo hay un usuario, materia y actividad por calificación
     alumno: {
             type: mongoose.Schema.Types.ObjectId, ref: 'Usuario',
