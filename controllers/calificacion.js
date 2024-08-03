@@ -23,17 +23,17 @@ const crearCalificacion = async (req, res = response) => {
 const obtenerCalificacion = async (req, res = response) => {
     const calificaciones = await Calificacion.find().populate([
     {
-        path: 'alumnos',
+        path: 'alumno',
         model: 'Usuario',
       },
   
       {
-        path: 'materias',
+        path: 'materia',
         model: 'Materia',
       },
   
    {
-        path: 'actividades',
+        path: 'actividad',
         model: 'Actividad',
       },
     
