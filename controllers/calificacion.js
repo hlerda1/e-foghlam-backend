@@ -9,7 +9,7 @@ const crearCalificacion = async (req, res = response) => {
   
       res.status(201).json({
         ok: true,
-        evento: calificacionGuardar,
+        calificacion: calificacionGuardar,
       });
     } catch (error) {
       res.status(500).json({
