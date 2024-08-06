@@ -8,19 +8,17 @@ const CursoSchema = Schema({
   fechaFin: Date,
   createDttm: { type: Date, default: Date.now },
 
-  materias: [
+  materias:
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Materia',
     },
-  ],
 
-  comision: [
+  comision:
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Curso',
+      ref: 'Comision',
     },
-  ],
 });
 
 module.exports = mongoose.model('Curso', CursoSchema);

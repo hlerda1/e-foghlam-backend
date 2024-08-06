@@ -22,7 +22,7 @@ const CrearCurso = async (req, res = response) => {
 // obtener cursos
 const obtenerCurso = async (req, res = response) => {
   //const cursos = await Curso.find().populate('materias');
-  const cursos = await Curso.find().populate([
+  const cursos = await Curso.find(req.query).populate([
     {
       path: 'materias',
       model: 'Materia',

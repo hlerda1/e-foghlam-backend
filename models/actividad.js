@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const curso = require('./curso');
 const Schema = mongoose.Schema;
 
 const ActividadSchema = Schema({
@@ -6,12 +7,19 @@ const ActividadSchema = Schema({
   tipoActividad: String,
   fechaFin: Date,
   consigna: String,
-  createDtt: { type: Date, default: Date.now },
+  curso: { type: mongoose.Schema.Types.ObjectId, ref: 'Curso', },
+  createDttm: { type: Date, default: Date.now },
   alumnos: [
     {
       idAlumno: String, 
-      estado: String, 
-      respuesta: String
+      estado: String,       
+      cuestionario: [
+        {
+          pregunta: String,
+          respuesta: String
+        }
+      ],
+      archivo: String,
     },
   ],
 });
